@@ -28,7 +28,10 @@ class _loginState extends State<login> {
                 child: Text('data'),
               ),
               Container(
-                child: Text('data'),
+                child: Text('data2'),
+              ),
+              Container(
+                child: Text('data1'),
               )
             ],
           ),
