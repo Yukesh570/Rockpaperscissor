@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:project/login.dart';
+import 'package:project/bottomfiles/bottom_navi.dart';
+import 'package:project/game.dart';
+import 'package:project/bottomfiles/home.dart';
+import 'package:project/login_info/signup.dart';
 
-class sign_up extends StatefulWidget {
-  sign_up({Key? key}) : super(key: key);
+class login extends StatefulWidget {
+  login({Key? key}) : super(key: key);
 
   @override
-  State<sign_up> createState() => _sign_upState();
+  State<login> createState() => _loginState();
 }
 
-class _sign_upState extends State<sign_up> {
+class _loginState extends State<login> {
+  bool? cheak_box = false;
   double circbox = 0;
   double circbox1 = 0;
-  double circbox2 = 0;
   bool circ = false;
   bool circ1 = false;
-  bool circ2 = false;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        FocusScope.of(context).requestFocus(FocusNode());
+        FocusScope.of(context).requestFocus(new FocusNode());
         setState(() {
           circbox = 0;
           circbox1 = 0;
-          circbox2 = 0;
         });
       },
       child: Scaffold(
@@ -61,7 +63,7 @@ class _sign_upState extends State<sign_up> {
                       else
                         circ = true;
                       circbox = 0;
-                      circbox2 = 0;
+
                       circ = !circ;
                       setState(() {
                         circ == true ? circbox1 = 40 : circbox1 = 0;
@@ -87,7 +89,7 @@ class _sign_upState extends State<sign_up> {
                       setState(() {
                         circ1 = true;
                         circbox1 = 0;
-                        circbox2 = 0;
+
                         circ1 == true ? circbox = 40 : circbox = 0;
                       });
                     },
@@ -100,34 +102,49 @@ class _sign_upState extends State<sign_up> {
                   width: 300,
                   height: 70,
                 ),
-                SizedBox(
-                  child: TextField(
-                    onTap: () {
-                      if (circbox2 == 0)
-                        circ2 = false;
-                      else
-                        circ2 = !circ2;
-                      setState(() {
-                        circ2 = true;
-                        circbox1 = 0;
-                        circbox = 0;
-                        circ2 == true ? circbox2 = 40 : circbox2 = 0;
-                      });
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(circbox2)),
-                      hintText: 'Confirm Password',
+                Row(
+                  children: [
+                    Container(
+                      child: Checkbox(
+                        value: cheak_box,
+                        onChanged: (bool? newvalue) {
+                          setState(() {
+                            cheak_box = newvalue;
+                          });
+                        },
+                      ),
+                      margin: EdgeInsets.only(left: 45),
                     ),
-                  ),
-                  width: 300,
+                    Container(child: Text('remember me')),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {});
+                      },
+                      child: Container(
+                        child: Text(
+                          'Forget password?',
+                          style: TextStyle(
+                            color: Colors.blue,
+                          ),
+                        ),
+                        margin: EdgeInsets.only(left: 40),
+                      ),
+                    )
+                  ],
                 ),
-                ElevatedButton(onPressed: () {}, child: Text('Sign up')),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return bottom_navi();
+                      }));
+                    },
+                    child: Text('Signin')),
                 Row(
                   children: [
                     Container(
                       margin: EdgeInsets.only(top: 30, left: 60),
-                      child: Text('Already have an account'),
+                      child: Text('Don\'t have a account? '),
                     ),
                     Container(
                         margin: EdgeInsets.only(
@@ -137,14 +154,14 @@ class _sign_upState extends State<sign_up> {
                         child: GestureDetector(
                           onTap: () {
                             setState(() {
-                              Navigator.pop(context,
+                              Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 return sign_up();
                               }));
                             });
                           },
                           child: Text(
-                            'Sign in',
+                            'Sign up',
                             style: TextStyle(
                               color: Colors.blue,
                             ),

@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:project/game.dart';
-import 'package:project/home.dart';
-import 'package:project/signup.dart';
+import 'package:project/login_info/login.dart';
 
-class login extends StatefulWidget {
-  login({Key? key}) : super(key: key);
+class sign_up extends StatefulWidget {
+  sign_up({Key? key}) : super(key: key);
 
   @override
-  State<login> createState() => _loginState();
+  State<sign_up> createState() => _sign_upState();
 }
 
-class _loginState extends State<login> {
-  bool? cheak_box = false;
+class _sign_upState extends State<sign_up> {
   double circbox = 0;
   double circbox1 = 0;
+  double circbox2 = 0;
   bool circ = false;
   bool circ1 = false;
-
+  bool circ2 = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        FocusScope.of(context).requestFocus(new FocusNode());
+        FocusScope.of(context).requestFocus(FocusNode());
         setState(() {
           circbox = 0;
           circbox1 = 0;
+          circbox2 = 0;
         });
       },
       child: Scaffold(
@@ -62,7 +61,7 @@ class _loginState extends State<login> {
                       else
                         circ = true;
                       circbox = 0;
-
+                      circbox2 = 0;
                       circ = !circ;
                       setState(() {
                         circ == true ? circbox1 = 40 : circbox1 = 0;
@@ -88,7 +87,7 @@ class _loginState extends State<login> {
                       setState(() {
                         circ1 = true;
                         circbox1 = 0;
-
+                        circbox2 = 0;
                         circ1 == true ? circbox = 40 : circbox = 0;
                       });
                     },
@@ -101,49 +100,34 @@ class _loginState extends State<login> {
                   width: 300,
                   height: 70,
                 ),
-                Row(
-                  children: [
-                    Container(
-                      child: Checkbox(
-                        value: cheak_box,
-                        onChanged: (bool? newvalue) {
-                          setState(() {
-                            cheak_box = newvalue;
-                          });
-                        },
-                      ),
-                      margin: EdgeInsets.only(left: 45),
-                    ),
-                    Container(child: Text('remember me')),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {});
-                      },
-                      child: Container(
-                        child: Text(
-                          'Forget password?',
-                          style: TextStyle(
-                            color: Colors.blue,
-                          ),
-                        ),
-                        margin: EdgeInsets.only(left: 40),
-                      ),
-                    )
-                  ],
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return home();
-                      }));
+                SizedBox(
+                  child: TextField(
+                    onTap: () {
+                      if (circbox2 == 0)
+                        circ2 = false;
+                      else
+                        circ2 = !circ2;
+                      setState(() {
+                        circ2 = true;
+                        circbox1 = 0;
+                        circbox = 0;
+                        circ2 == true ? circbox2 = 40 : circbox2 = 0;
+                      });
                     },
-                    child: Text('Signin')),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(circbox2)),
+                      hintText: 'Confirm Password',
+                    ),
+                  ),
+                  width: 300,
+                ),
+                ElevatedButton(onPressed: () {}, child: Text('Sign up')),
                 Row(
                   children: [
                     Container(
                       margin: EdgeInsets.only(top: 30, left: 60),
-                      child: Text('Don\'t have a account? '),
+                      child: Text('Already have an account'),
                     ),
                     Container(
                         margin: EdgeInsets.only(
@@ -153,14 +137,14 @@ class _loginState extends State<login> {
                         child: GestureDetector(
                           onTap: () {
                             setState(() {
-                              Navigator.push(context,
+                              Navigator.pop(context,
                                   MaterialPageRoute(builder: (context) {
                                 return sign_up();
                               }));
                             });
                           },
                           child: Text(
-                            'Sign up',
+                            'Sign in',
                             style: TextStyle(
                               color: Colors.blue,
                             ),
