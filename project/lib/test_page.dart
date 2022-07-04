@@ -85,7 +85,7 @@ class _TestPageState extends State<TestPage> {
                     ),
                     Text(widget.locData.toString()),
                     RatingBar.builder(
-                      initialRating: 3,
+                      initialRating: widget.starData!.toDouble(),
                       minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
