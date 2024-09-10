@@ -14,5 +14,6 @@ class Networkhelper {
     } else {
       print('Error');
     }
+    return null;
   }
 }
